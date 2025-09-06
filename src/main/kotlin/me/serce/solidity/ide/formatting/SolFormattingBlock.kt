@@ -12,6 +12,7 @@ import com.intellij.psi.formatter.FormatterUtil
 import com.intellij.psi.impl.source.tree.CompositeElement
 import com.intellij.psi.tree.IElementType
 import me.serce.solidity.lang.core.SolidityTokenTypes.*
+import me.serce.solidity.lang.stubs.SolidityFileStub
 import java.util.*
 
 open class SolFormattingBlock(
@@ -105,6 +106,10 @@ open class SolFormattingBlock(
         enforceChildIndent = true
         Indent.getNormalIndent()
       }
+      
+      // pasted code inside a block
+      type == BLOCK && childType == IDENTIFIER -> Indent.getNormalIndent()
+      type is SolidityFileStub.Type && childType == PRIMARY_EXPRESSION -> Indent.getNormalIndent()
 
       type == FUNCTION_INVOCATION && parent?.treeParent?.elementType == MAP_EXPRESSION_CLAUSE && childType in setOf(FUNCTION_CALL_ARGUMENTS, LPAREN, RPAREN) -> Indent.getNormalIndent()
 
