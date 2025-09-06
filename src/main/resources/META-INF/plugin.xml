@@ -107,7 +107,11 @@
       
         <typedHandler implementation="me.serce.solidity.ide.typing.SolSemicolonTypedHandler"/>
       
-        <!-- Brace Matcher -->
+        <typedHandler implementation="me.serce.solidity.ide.typing.SolQuoteTypedHandler"/>
+        <typedHandler implementation="me.serce.solidity.ide.typing.SolSemicolonTypedHandler"/>
+        <backspaceHandlerDelegate implementation="me.serce.solidity.ide.typing.SolQuoteBackspaceHandler"/>
+
+      <!-- Brace Matcher -->
         <lang.braceMatcher language="Solidity" implementationClass="me.serce.solidity.ide.SolBraceMatcher"/>
 
         <!-- Quote Handlers -->
